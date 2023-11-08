@@ -35,3 +35,22 @@
 //     }
 //   }
 // }
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      loginUser(username: string, password: string): Chainable<void>
+    }
+  }
+}
+
+import loginPage from "../e2e/pages/loginPage"
+import { enterText } from "../e2e/helpers/utils"
+import { clickElement } from "../e2e/helpers/utils"
+
+Cypress.Commands.add("loginUser", (username: string, password: string) => {
+  cy.visit(Cypress.env("baseUrl"))
+
+  enterText(loginPage.elements.usernameField(), username)
+  enterText(loginPage.elements.passwordField(), password)
+  clickElement(loginPage.elements.loginBtn())
+})

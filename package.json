@@ -4,7 +4,8 @@
   "description": "cypress + typescript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:o": "cypress open",
+    "cy:r": "cypress run"
   },
   "author": "mradman",
   "license": "ISC",

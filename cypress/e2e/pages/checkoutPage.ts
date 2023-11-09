@@ -4,7 +4,8 @@ class CheckoutPage {
     lastNameField: () => cy.get("#last-name"),
     zipCodeField: () => cy.get("#postal-code"),
     continueBtn: () => cy.get("#continue"),
-    finishBtn: () => cy.get("#finish")
+    finishBtn: () => cy.get("#finish"),
+    completeOrderMsg: () => cy.contains("Thank you for your order!")
   }
 }
 

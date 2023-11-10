@@ -11,3 +11,20 @@ export interface CheckoutData {
   lastName: string,
   zipCode: string
 }
+
+export enum Products {
+  backpack,
+  bikeLight,
+  boltTShirt,
+  fleeceJacket,
+  Onesie,
+  testAllTheThings_tShirt
+}
+
+export enum CartItems {
+  first,
+  second,
+  third,
+  fourth,
+  fifth
+}

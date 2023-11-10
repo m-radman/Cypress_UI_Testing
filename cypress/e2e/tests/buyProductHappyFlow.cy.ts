@@ -2,15 +2,25 @@ import inventoryPage from "../pages/inventoryPage"
 import productPage from "../pages/productPage"
 import navBar from "../pages/common/navBar"
 import cartPage from "../pages/cartPage"
-
-import { CheckoutData } from "../helpers/utils"
 import checkoutPage from "../pages/checkoutPage"
+
+import { CheckoutData, Products, CartItems, clickElement } from "../helpers/utils"
 
 describe("Buy", () => {
   let checkoutFormData: CheckoutData
 
+  let product1: string
+  let product2: string
+
   before(() => {
     cy.loginUser(Cypress.env("username"), Cypress.env("password"))
+
+    inventoryPage.elements.productNameLinks().eq(Products.backpack).invoke("text").then((item) => {
+      product1 = item
+    })
+    inventoryPage.elements.productNameLinks().eq(Products.fleeceJacket).invoke("text").then((item) => {
+      product2 = item
+    })
 
     cy.fixture("checkoutFormData").then((data) => {
       checkoutFormData = data
@@ -19,28 +29,28 @@ describe("Buy", () => {
 
   it("Buy Products", () => {
     //add first prod
-    inventoryPage.elements.productNameLinks().eq(0).click()
-    productPage.elements.addToCartBtn().click()
-    productPage.elements.backToProductsBtn().click()
+    inventoryPage.addProductToCart(Products.backpack)
+    navBar.elements.shoppingCartBadge().should("contain", "1")
 
     //add second prod
-    inventoryPage.elements.addToCartBtns().eq(2).click()
+    productPage.addProductToCart(Products.fleeceJacket)
+    navBar.elements.shoppingCartBadge().should("contain", "2")
 
     //go to cart
-    navBar.elements.shoppingCartLink().click()
-    cartPage.elements.removeProductBtns().eq(0) //remove item
-    cartPage.elements.checkoutBtn().click()
+    clickElement(navBar.elements.shoppingCartLink())
+    cartPage.elements.addedProductsList().eq(CartItems.first).should("have.text", product1)
+    cartPage.elements.addedProductsList().eq(CartItems.second).should("have.text", product2)
 
-    //fill checkout form
-    checkoutPage.elements.firstNameField().type(checkoutFormData.firstName)
-    checkoutPage.elements.lastNameField().type(checkoutFormData.lastName)
-    checkoutPage.elements.zipCodeField().type(checkoutFormData.zipCode)
+    //remove product from cart
+    cartPage.removeProduct(CartItems.first)
+    navBar.elements.shoppingCartBadge().should("contain", "1")
+    cartPage.elements.addedProductsList().eq(CartItems.first).should("have.text", product2)
 
-    //complete order
-    checkoutPage.elements.continueBtn().click()
-    checkoutPage.elements.finishBtn().click()
+    //go to checkout
+    clickElement(cartPage.elements.checkoutBtn())
+    checkoutPage.completeForm(checkoutFormData)
 
-    //assert
-    checkoutPage.elements.completeOrderMsg().should("be.visible")
+    //complete & assert successfull order
+    checkoutPage.confirmOrder()
   })
 })

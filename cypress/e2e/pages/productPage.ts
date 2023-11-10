@@ -7,7 +7,7 @@ class ProductPage {
     backToProductsBtn: () => cy.get("#back-to-products")
   }
 
-  addProductToCart(index: number): void {
+  addProductToCart(index: number) {
     clickElement(inventoryPage.elements.productNameLinks().eq(index))
     clickElement(this.elements.addToCartBtn())
     clickElement(this.elements.backToProductsBtn())

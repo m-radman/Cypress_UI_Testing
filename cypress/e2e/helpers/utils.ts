@@ -28,3 +28,10 @@ export enum CartItems {
   fourth,
   fifth
 }
+
+export enum SortOptions {
+  AtoZ = "az",
+  ZtoA = "za",
+  LowToHigh = "lohi",
+  HighToLow = "hilo"
+}

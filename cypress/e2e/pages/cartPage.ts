@@ -8,7 +8,7 @@ class CartPage {
     removeProductBtns: () => cy.get(".btn_small")
   }
 
-  removeProduct(index): void {
+  removeProduct(index) {
     clickElement(this.elements.removeProductBtns().eq(index))
   }
 }

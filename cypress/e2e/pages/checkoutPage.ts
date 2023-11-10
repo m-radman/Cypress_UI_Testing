@@ -12,13 +12,13 @@ class CheckoutPage {
     completeOrderMsg: () => cy.contains("Thank you for your order!")
   }
 
-  completeForm(checkoutFormData: CheckoutData): void {
+  completeForm(checkoutFormData: CheckoutData) {
     enterText(this.elements.firstNameField(), checkoutFormData.firstName)
     enterText(this.elements.lastNameField(), checkoutFormData.lastName)
     enterText(this.elements.zipCodeField(), checkoutFormData.zipCode)
   }
 
-  confirmOrder(): void {
+  confirmOrder() {
     clickElement(this.elements.continueBtn())
     cy.url().should("contain", "/checkout-step-two")
     clickElement(this.elements.finishBtn())

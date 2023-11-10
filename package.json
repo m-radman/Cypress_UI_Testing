@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "cy:o": "cypress open",
-    "cy:r": "cypress run"
+    "cy:r": "cypress run",
+    "runHF": "cypress run --spec 'cypress/e2e/tests/buyProductHappyFlow.cy.ts'",
+    "runSortTests": "cypress run --spec 'cypress/e2e/tests/sortProducts.cy.ts'"
   },
   "author": "mradman",
   "license": "ISC",
   "devDependencies": {
-    "@faker-js/faker": "^8.2.0",
     "cypress": "^13.4.0",
     "typescript": "^5.2.2"
   }

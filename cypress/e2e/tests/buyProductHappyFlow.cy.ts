@@ -6,7 +6,7 @@ import checkoutPage from "../pages/checkoutPage"
 
 import { CheckoutData, Products, CartItems, clickElement } from "../helpers/utils"
 
-describe("Buy", () => {
+describe("Buy Products E2E", () => {
   let checkoutFormData: CheckoutData
 
   let product1: string

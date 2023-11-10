@@ -1,5 +1,14 @@
 import { defineConfig } from "cypress";
 
+import fs = require("fs-extra");
+import path = require("path");
+
+function getConfigurationByFile(file: any) {
+  const pathToConfigFile = path.resolve("cypress/configs", `${file}.json`);
+
+  return fs.readJson(pathToConfigFile);
+}
+
 export default defineConfig({
   env: {
     baseUrl: "https://www.saucedemo.com/",
@@ -9,6 +18,8 @@ export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      const file = config.env.configFile || "standardUser";
+      return getConfigurationByFile(file);
     },
     specPattern: "cypress/e2e/tests/**/*.cy.ts",
     chromeWebSecurity: false

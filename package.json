@@ -7,11 +7,13 @@
     "cy:o": "cypress open",
     "cy:r": "cypress run",
     "runHF": "cypress run --spec 'cypress/e2e/tests/buyProductHappyFlow.cy.ts'",
-    "runSortTests": "cypress run --spec 'cypress/e2e/tests/sortProducts.cy.ts'"
+    "runSortTests": "cypress run --spec 'cypress/e2e/tests/sortProducts.cy.ts'",
+    "cy:lockedUser": "cypress open --env configFile=lockedUser"
   },
   "author": "mradman",
   "license": "ISC",
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "cypress": "^13.4.0",
     "typescript": "^5.2.2"
   }

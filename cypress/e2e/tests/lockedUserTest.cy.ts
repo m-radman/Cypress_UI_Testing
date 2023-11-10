@@ -1,4 +1,4 @@
-//Test will work only lockedUser config
+//Test will work only with lockedUser config
 
 describe("Confirm locked user can't login", () => {
   it("Login with locked credentials", () => {
